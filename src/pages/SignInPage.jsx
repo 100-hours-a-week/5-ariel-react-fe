@@ -67,7 +67,7 @@ class SignInPage extends React.Component {
                             disabled={!this.state.isValid}
                             text="로그인"
                         />
-                        <HyperlinkText to="/signup" text="회원가입" />
+                        <HyperlinkText to="/sign-up" text="회원가입" />
                     </form>
                 </section>
             </div>
