@@ -39,7 +39,7 @@ class SignInPage extends React.Component {
             <div>
                 <Header />
                 <section className="login-form">
-                    <FormTitle className="title-login" text="로그인" />
+                    <FormTitle class="title-login" text="로그인" />
                     <form id="loginForm" onSubmit={this.handleSubmit}>
                         <InputTitle title="이메일" />
                         <Inputs

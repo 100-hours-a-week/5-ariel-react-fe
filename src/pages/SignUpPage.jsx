@@ -47,7 +47,7 @@ class SignUpPage extends React.Component {
             <div>
                 <Header showBackButton={true} />
                 <section className="signup-form">
-                    <FormTitle className="title-signup" text="회원가입" />
+                    <FormTitle class="title-signup" text="회원가입" />
                     <form action="http://localhost:3001/signup" method="post" id="signupForm" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                         <InputTitle title="프로필 사진*" />
                         <HelperText id="helperText" text="* 프로필 사진을 추가해주세요." />
