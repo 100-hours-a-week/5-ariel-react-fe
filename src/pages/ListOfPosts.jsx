@@ -9,6 +9,8 @@ import user2 from '../assets/images/user2.png';
 import user3 from '../assets/images/user3.png';
 import user4 from '../assets/images/user4.png';
 import user5 from '../assets/images/user5.png';
+import PostInfo from '../components/PostInfo';
+import Button from '../components/Button';
 
 class ListOfPosts extends React.Component {
     constructor(props) {
@@ -93,56 +95,21 @@ class ListOfPosts extends React.Component {
         //     .then(data => this.setState({ posts: data }));
     }
 
-    // 날짜와 시간을 받아서 원하는 형식으로 포맷팅하는 함수
-    formatDateTime(date, time) {
-        // 날짜와 시간을 공백으로 구분하여 ISO 8601 형식의 문자열로 변환
-        const isoDateTimeString = `${date}T${time}`;
-        const dateTime = new Date(isoDateTimeString);
-        // 만약 날짜와 시간이 유효하지 않다면 빈 문자열 반환
-        if (isNaN(dateTime.getTime())) {
-            return '';
-        }
-        // ISO 8601 형식에서 시간 정보를 추출하여 반환
-        const year = dateTime.getFullYear();
-        const month = String(dateTime.getMonth() + 1).padStart(2, '0');
-        const day = String(dateTime.getDate()).padStart(2, '0');
-        const hours = String(dateTime.getHours()).padStart(2, '0');
-        const minutes = String(dateTime.getMinutes()).padStart(2, '0');
-        const seconds = String(dateTime.getSeconds()).padStart(2, '0');
-        // YYYY-MM-DD HH:MM:SS 형식으로 반환
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    }
-
     render() {
         return (
             <div>
-                <Header showProfileImage='true'/>
+                <Header showProfileImage={true} />
                 <section className="main">
                     <section className="greeting">
                         <p>안녕하세요,<br />아무 말 대잔치 <b>게시판</b> 입니다.</p>
                     </section>
                     <section className="create-post">
-                        <Link to="/create-post"><button className="create-post-button">게시글 작성</button></Link>
+                        <Link to="/create-post"><Button class="create-post-button" text="게시글 작성"/></Link>
                     </section>
                     <section className="posts" id="postList">
                         {/* 게시글 목록을 동적으로 렌더링하는 부분 */}
                         {this.state.posts.map(post => (
-                            <section className="post">
-                                <Link to={`/post-details?id=${post.id}`} key={post.id}>
-
-                                    <h1 className="post-title">{post.title}</h1>
-                                    <p className="post-information">
-                                        <span className="post-reaction">좋아요 {post.likes} 댓글 {post.comments} 조회수 {post.views}</span>
-                                        <span className="post-date">{this.formatDateTime(post.date, post.time)}</span>
-                                    </p>
-                                    <hr />
-                                    <div className="author">
-                                        <div className="author-profile" style={{ backgroundImage: `url('${post.author.profile_picture}')` }}></div>
-                                        <div className="author-name"><small><b>{post.author.nickname}</b></small></div>
-                                    </div>
-
-                                </Link>
-                            </section>
+                            <PostInfo key={post.id} post={post} />
                         ))}
                     </section>
                 </section>

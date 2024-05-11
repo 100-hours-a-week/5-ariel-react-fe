@@ -3,6 +3,7 @@ import './App.css';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import ListOfPosts from './pages/ListOfPosts';
+import CreatePost from './pages/CreatePost';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path='/sign-in' element={<SignInPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/list-of-posts' element={<ListOfPosts />} />
+        <Route path='/create-post' element={<CreatePost />} />
       </Routes>
     </BrowserRouter>
   );

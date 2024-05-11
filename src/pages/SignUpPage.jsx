@@ -47,7 +47,7 @@ class SignUpPage extends React.Component {
             <div>
                 <Header showBackButton={true} />
                 <section className="signup-form">
-                    <FormTitle className="title-signup" text="회원가입" />
+                    <FormTitle class="title-signup" text="회원가입" />
                     <form action="http://localhost:3001/signup" method="post" id="signupForm" encType="multipart/form-data" onSubmit={this.handleSubmit}>
                         <InputTitle title="프로필 사진*" />
                         <HelperText id="helperText" text="* 프로필 사진을 추가해주세요." />
@@ -106,9 +106,6 @@ class SignUpPage extends React.Component {
                             disabled={!this.state.isValid}
                             text="회원가입"
                         />
-                        {/* <a href="sign-in">
-                            <p><small>로그인하러 가기</small></p>
-                        </a> */}
                         <HyperlinkText to="/signin" text="로그인하러 가기" />
                     </form>
                 </section>
