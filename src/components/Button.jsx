@@ -5,7 +5,7 @@ class Button extends React.Component {
         return (
             <button 
                 id={this.props.id}
-                class={this.props.class}
+                className={this.props.class}
                 type={this.props.type}
                 disabled={this.props.disabled}
                 onClick={this.props.onClick}

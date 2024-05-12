@@ -5,6 +5,7 @@ import SignUpPage from './pages/SignUpPage';
 import ListOfPosts from './pages/ListOfPosts';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
+import PostDetails from './pages/PostDetails';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/list-of-posts' element={<ListOfPosts />} />
         <Route path='/create-post' element={<CreatePost />} />
         <Route path='/update-post' element={<UpdatePost />} />
+        <Route path='/post-details' element={<PostDetails />} />
       </Routes>
     </BrowserRouter>
   );
