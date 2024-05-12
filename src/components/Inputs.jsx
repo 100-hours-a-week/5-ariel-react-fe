@@ -13,6 +13,7 @@ class Inputs extends React.Component {
                 name={this.props.name}
                 value={this.props.value}
                 onChange={this.props.onChange}
+                onInput={this.props.onInput}
             />
         );
     }
