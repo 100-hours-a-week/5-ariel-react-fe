@@ -22,10 +22,10 @@ const PostInfo = ({ post }) => {
     return (
         <section className="post">
             <Link to={`/post-details?id=${post.id}`} key={post.id}>
-                <h1 className="post-title">{post.title}</h1>
+                <h1 className="list-post-title">{post.title}</h1>
                 <p className="post-information">
                     <span className="post-reaction">좋아요 {post.likes} 댓글 {post.comments} 조회수 {post.views}</span>
-                    <span className="post-date">{formatDateTime(post.date, post.time)}</span>
+                    <span className="list-post-date">{formatDateTime(post.date, post.time)}</span>
                 </p>
                 <hr />
                 <div className="author">
