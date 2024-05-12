@@ -6,6 +6,7 @@ import ListOfPosts from './pages/ListOfPosts';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
 import PostDetails from './pages/PostDetails';
+import UpdateProfile from './pages/UpdateProfile';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/create-post' element={<CreatePost />} />
         <Route path='/update-post' element={<UpdatePost />} />
         <Route path='/post-details' element={<PostDetails />} />
+        <Route path='/update-profile' element={<UpdateProfile />} />
       </Routes>
     </BrowserRouter>
   );

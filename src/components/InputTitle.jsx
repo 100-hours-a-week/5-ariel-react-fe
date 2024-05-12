@@ -5,7 +5,7 @@ class InputTitle extends React.Component {
         const className = this.props.class ? this.props.class : 'input-titles';
 
         return (
-            <div className="input-titles">
+            <div className={className}>
                 <b>{this.props.title}</b>
             </div>
         );
