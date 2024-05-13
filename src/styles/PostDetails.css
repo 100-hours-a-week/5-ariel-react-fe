@@ -1,38 +1,8 @@
-header {
-    display: flex;
-}
-
 .main {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     width: 400px;
-}
-
-.title-image {
-    display: block;
-    margin: 10px auto;
-    width: 150px;
-}
-
-/* .profile-image {
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    left: calc(50% + 200px);
-    margin: 10px auto;
-    border-radius: 50%;
-    object-fit: cover;
-} */
-
-.back-button {
-    color: black;
-    margin-top: 15px;
-    font-size: 20px;
-    position: absolute;
-    /* back-button 요소를 절대 위치로 설정합니다. */
-    left: calc(50% - 200px);
-    /* title-image의 왼쪽에 50px 떨어뜨리려면, title-image의 가로 너비의 절반을 빼고, 50px를 더해야 합니다. */
 }
 
 .post-title {

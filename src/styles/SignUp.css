@@ -1,21 +1,3 @@
-header {
-    display: flex;
-}
-
-.title-image {
-    display: block;
-    margin: 10px auto;
-    width: 150px;
-}
-
-.back-button {
-    color: black;
-    margin-top: 13px;
-    font-size: 20px;
-    position: absolute;
-    left: calc(50% - 200px);
-}
-
 .signup-form {
     flex-direction: column;
     align-items: center;
