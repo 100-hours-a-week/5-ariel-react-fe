@@ -7,7 +7,7 @@ import InputTitle from '../components/InputTitle';
 import Textarea from '../components/Textarea';
 import Button from '../components/Button';
 import '../styles/UpdatePost.css';
-import '../styles/common.css';
+import '../styles/Common.css';
 
 const UpdatePost = () => {
     const [title, setTitle] = useState('');

@@ -7,7 +7,7 @@ import HelperText from '../components/HelperText';
 import Button from '../components/Button';
 import HyperlinkText from '../components/HyperlinkText';
 import '../styles/SignIn.css'
-import '../styles/common.css';
+import '../styles/Common.css';
 
 class SignInPage extends React.Component {
     constructor(props) {

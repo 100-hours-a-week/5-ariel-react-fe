@@ -6,7 +6,7 @@ import Textarea from '../components/Textarea';
 import Button from '../components/Button';
 import HelperText from '../components/HelperText';
 import '../styles/CreatePost.css';
-import '../styles/common.css';
+import '../styles/Common.css';
 
 
 const CreatePost = () => {

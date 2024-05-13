@@ -1,0 +1,143 @@
+/* 버튼에 마우스를 올리면 커서가 포인터로 변경됨 */
+button {
+    cursor: pointer;
+}
+
+/* 로그인 버튼, 회원가입 버튼, 비밀번호 변경 버튼 */
+#loginButton, .signup-button, .modify-password-button {
+    width: 100%;
+    color: white;
+    background-color: #ACA0EB;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* 회원정보 수정 버튼 */
+.modify-profile-button {
+    width: 100%;
+    color: white;
+    background-color: #ACA0EB;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+/* 프로필 사진 추가 버튼 */
+.circle-button {
+    width: 100px;
+    height: 100px;
+    background-color: #C4C4C4;
+    border-radius: 50%;
+    border: none;
+    margin: 10px auto;
+    display: block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 게시글 작성 완료 버튼, 게시글 수정 완료 버튼 */
+.complete-button {
+    width: 60%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    text-align: center;
+    color: white;
+    background-color: #ACA0EB;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* 게시글 작성 버튼 */
+.create-post-button {
+    width: 100px;
+    color: white;
+    background-color: #ACA0EB;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    border-radius: 10px;
+    position: absolute;
+    right: 0;
+}
+
+/* 게시글 작성 버튼에 마우스를 올렸을 때 */
+.create-post-button:hover {
+    background-color: #7F6AEE;
+}
+
+/* 편집(수정, 삭제) 버튼 */
+.edit-buttons {
+    display: flex;
+    position: absolute;
+    right: 0;
+}
+
+/* 수정, 삭제 버튼*/
+.modify-button,
+.delete-button {
+    border-radius: 5px;
+    border: 1px solid #ACA0EB;
+    background-color: transparent;
+    padding: 3px 10px;
+    margin-left: 5px;
+}
+
+/* 댓글 등록 버튼 */
+.comment-register-button {
+    width: 100px;
+    color: white;
+    background-color: #ACA0EB;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    border-radius: 10px;
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+}
+
+.dialog button {
+    margin: 0 5px;
+    width: 25%;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.dialog .cancel-button {
+    background-color: #242424;
+    color: white;
+    border: none;
+    box-shadow: none;
+    border-radius: 10px;
+}
+
+.dialog .ok-button {
+    background-color: #C4A5FA;
+    border: none;
+    box-shadow: none;
+    border-radius: 10px;
+}
+
+/* 회원정보 - 프로필 사진 변경 버튼 */
+.profile-image-button {
+    width: 150px;
+    height: 150px;
+    background-color: #C4C4C4;
+    border-radius: 50%;
+    border: none;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}

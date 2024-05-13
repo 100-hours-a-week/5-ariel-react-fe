@@ -11,7 +11,7 @@ import user5 from '../assets/images/user5.png';
 import PostInfo from '../components/PostInfo';
 import Button from '../components/Button';
 import '../styles/ListOfPosts.css';
-import '../styles/common.css';
+import '../styles/Common.css';
 
 class ListOfPosts extends React.Component {
     constructor(props) {

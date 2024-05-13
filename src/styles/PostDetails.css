@@ -36,30 +36,13 @@
     margin-left: 20px;
 }
 
-.edit-buttons {
-    display: flex;
-    position: absolute;
-    right: 0;
-}
-
-.modify-button,
-.delete-button {
-    border-radius: 5px;
-    border: 1px solid #ACA0EB;
-    background-color: transparent;
-    padding: 3px 10px;
-    margin-left: 5px;
-}
-
 hr {
     border-color: #D9D9D9;
     border-width: 0.5px;
 }
 
-button,
 a {
     cursor: pointer;
-    /* 마우스 커서를 포인터로 변경하여 버튼임을 나타냄 */
 }
 
 .post-image {
@@ -103,19 +86,6 @@ a {
     outline: none;
     border-radius: 10px;
     background-color: white;
-}
-
-.comment-register-button {
-    width: 100px;
-    color: white;
-    background-color: #ACA0EB;
-    height: 30px;
-    border: none;
-    box-shadow: none;
-    border-radius: 10px;
-    position: absolute;
-    right: 0;
-    margin-right: 5px;
 }
 
 .current-comment-info {
@@ -189,32 +159,8 @@ a {
     display: none;
 }
 
-.dialog .buttons {
+.dialog {
     text-align: center;
-}
-
-.dialog button {
-    margin: 0 5px;
-    width: 25%;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    cursor: pointer;
-    /* 마우스 커서를 포인터로 변경하여 버튼임을 나타냄 */
-}
-
-.dialog .cancel-button {
-    background-color: #242424;
-    color: white;
-    border: none;
-    box-shadow: none;
-    border-radius: 10px;
-}
-
-.dialog .ok-button {
-    background-color: #C4A5FA;
-    border: none;
-    box-shadow: none;
-    border-radius: 10px;
 }
 
 #toastMessage {

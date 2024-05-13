@@ -7,7 +7,7 @@ import ProfileImage from '../assets/images/modify-profile-image.png'
 import HelperText from '../components/HelperText';
 import Button from '../components/Button';
 import '../styles/UpdateProfile.css';
-import '../styles/common.css';
+import '../styles/Common.css';
 
 const UpdateProfile = () => {
   const [nickname, setNickname] = useState('');

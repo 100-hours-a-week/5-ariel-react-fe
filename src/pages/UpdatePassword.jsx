@@ -6,7 +6,7 @@ import Inputs from '../components/Inputs';
 import HelperText from '../components/HelperText';
 import Button from '../components/Button';
 import '../styles/UpdatePassword.css';
-import '../styles/common.css';
+import '../styles/Common.css';
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState('');

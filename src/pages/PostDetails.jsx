@@ -8,7 +8,7 @@ import user1 from '../assets/images/user1.png'
 import author1 from '../assets/images/author1.webp'
 import post1 from '../assets/images/post1.jpeg'
 import '../styles/PostDetails.css'; 
-import '../styles/common.css';
+import '../styles/Common.css';
 
 const PostDetails = () => {
     // 게시글 및 댓글 데이터 설정
