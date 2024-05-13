@@ -5,7 +5,8 @@ import InputTitle from '../components/InputTitle';
 import Inputs from '../components/Inputs';
 import HelperText from '../components/HelperText';
 import Button from '../components/Button';
-import '../styles/UpdatePassword.css'; // 비밀번호 수정 페이지의 CSS를 임포트합니다.
+import '../styles/UpdatePassword.css';
+import '../styles/common.css';
 
 const UpdatePassword = () => {
   const [password, setPassword] = useState('');

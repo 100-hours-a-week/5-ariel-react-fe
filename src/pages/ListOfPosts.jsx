@@ -3,7 +3,6 @@
 import React from 'react';
 import Header from '../components/Header';
 import { Link } from 'react-router-dom';
-import '../styles/ListOfPosts.css';
 import user1 from '../assets/images/user1.png';
 import user2 from '../assets/images/user2.png';
 import user3 from '../assets/images/user3.png';
@@ -11,6 +10,8 @@ import user4 from '../assets/images/user4.png';
 import user5 from '../assets/images/user5.png';
 import PostInfo from '../components/PostInfo';
 import Button from '../components/Button';
+import '../styles/ListOfPosts.css';
+import '../styles/common.css';
 
 class ListOfPosts extends React.Component {
     constructor(props) {

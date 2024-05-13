@@ -1,14 +1,3 @@
-/* 스크롤바 숨기기 */
-html::-webkit-scrollbar {
-    display: none;
-}
-
-body {
-    justify-content: center;
-    font-family: "Noto Sans KR", sans-serif;
-    background-color: #F4F5F7;
-}
-
 header {
     display: flex;
 }
@@ -26,7 +15,7 @@ header {
     width: 150px;
 }
 
-.profile-image {
+/* .profile-image {
     width: 35px;
     height: 35px;
     position: absolute;
@@ -34,7 +23,7 @@ header {
     margin: 10px auto;
     border-radius: 50%;
     object-fit: cover;
-}
+} */
 
 .back-button {
     color: black;

@@ -6,7 +6,8 @@ import Inputs from '../components/Inputs';
 import ProfileImage from '../assets/images/modify-profile-image.png'
 import HelperText from '../components/HelperText';
 import Button from '../components/Button';
-import '../styles/UpdateProfile.css'; // CSS 파일을 React에서 사용하도록 import
+import '../styles/UpdateProfile.css';
+import '../styles/common.css';
 
 const UpdateProfile = () => {
   const [nickname, setNickname] = useState('');

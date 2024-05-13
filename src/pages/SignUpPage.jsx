@@ -8,7 +8,7 @@ import Inputs from '../components/Inputs';
 import Button from '../components/Button';
 import HyperlinkText from '../components/HyperlinkText';
 import '../styles/SignUp.css';
-
+import '../styles/common.css';
 
 class SignUpPage extends React.Component {
     constructor(props) {
