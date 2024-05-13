@@ -80,36 +80,6 @@ hr {
     border-width: 0.5px;
 }
 
-.dropdown {
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    /* 부모 요소 .dropdown을 기준으로 절대 위치로 설정합니다. */
-    background-color: #D9D9D9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    top: 10%;
-    /* 부모 요소 .dropdown 바로 아래에 나타나도록 설정합니다. */
-    left: 55%;
-    /* 부모 요소 .dropdown과 왼쪽 정렬됩니다. */
-    text-align: center;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-
 .show {
     display: block;
 }
