@@ -42,4 +42,5 @@ a {
 .helper-text {
     color: red;
     visibility: hidden;
+    margin-bottom: 20px;
 }
