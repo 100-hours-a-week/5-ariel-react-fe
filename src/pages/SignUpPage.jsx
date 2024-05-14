@@ -7,8 +7,12 @@ import HelperText from '../components/HelperText';
 import Inputs from '../components/Inputs';
 import Button from '../components/Button';
 import HyperlinkText from '../components/HyperlinkText';
+import InputEmail from '../components/InputEmail';
+import InputPassword from '../components/InputPassword';
+import InputNickname from '../components/InputNickname';
+import InputFile from '../components/InputFile';
 import '../styles/SignUp.css';
-
+import '../styles/Common.css';
 
 class SignUpPage extends React.Component {
     constructor(props) {
@@ -53,60 +57,26 @@ class SignUpPage extends React.Component {
                         <HelperText id="helperText" text="* 프로필 사진을 추가해주세요." />
                         <label className="circle-button" id="profileImage" htmlFor="profileImageInput">
                             <img id="profilePreview" src={profileImage} className="plus-sign" alt="plus-sign" />
-                            <input id="profileImageInput" type="file" accept="image/*" style={{ display: 'none' }} name="profile_picture" />
+                            <InputFile id="profileImageInput" onChange={this.handleFileChange} />
                         </label>
                         <p><InputTitle title="이메일*" />
-                            <Inputs
-                                id="emailInput"
-                                type="text"
-                                placeholder="이메일을 입력하세요"
-                                name="email"
-                                value={this.state.email}
-                                onChange={this.handleChange}
-                            />
+                            <InputEmail value={this.state.email} onChange={this.handleChange} />
                             <HelperText id="helperText" text="* 이메일을 입력해주세요." />
                         </p>
                         <p><InputTitle title="비밀번호*" />
-                            <Inputs
-                                id="passwordInput"
-                                type="password"
-                                placeholder="비밀번호를 입력하세요"
-                                name="password"
-                                value={this.state.password}
-                                onChange={this.handleChange}
-                            />
+                            <InputPassword value={this.state.password} onChange={this.handleChange} />
                             <HelperText id="helperText" text="* 비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다." />
                         </p>
                         <p><InputTitle title="비밀번호 확인*" />
-                            <Inputs
-                                id="confirmPasswordInput"
-                                type="password"
-                                placeholder="비밀번호를 한번 더 입력하세요"
-                                name="confirmPassword"
-                                value={this.state.confirmPassword}
-                                onChange={this.handleChange}
-                            />
+                            <InputPassword value={this.state.confirmPassword} onChange={this.handleChange} name="confirmPassword" id="confirmPasswordInput" placeholder="비밀번호를 한번 더 입력하세요" />
                             <HelperText id="helperText" text="* 비밀번호를 한번 더 입력해주세요." />
                         </p>
                         <p><InputTitle title="닉네임*" />
-                            <Inputs
-                                id="nicknameInput"
-                                type="text"
-                                placeholder="닉네임을 입력하세요"
-                                name="nickname"
-                                value={this.state.nickname}
-                                onChange={this.handleChange}
-                            />
+                            <InputNickname value={this.state.nickname} onChange={this.handleChange} />
                             <HelperText id="helperText" text="* 닉네임을 입력해주세요." />
                         </p>
-                        <Button
-                            id="signupButton"
-                            class="signup-button"
-                            type="submit"
-                            disabled={!this.state.isValid}
-                            text="회원가입"
-                        />
-                        <HyperlinkText to="/signin" text="로그인하러 가기" />
+                        <Button id="signupButton" class="signup-button" type="submit" disabled={!this.state.isValid} text="회원가입" />
+                        <HyperlinkText to="/sign-in" text="로그인하러 가기" />
                     </form>
                 </section>
             </div>

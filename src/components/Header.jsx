@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import titleImage from '../assets/images/title.png';
 import profileImage from '../assets/images/profile-image.png';
+import '../styles/Header.css'
+import '../styles/Dropdown.css'
 
 const Header = ({ showBackButton, showProfileImage }) => {
     const location = useLocation();

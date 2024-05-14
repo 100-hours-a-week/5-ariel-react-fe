@@ -1,0 +1,27 @@
+header {
+    display: flex;
+}
+
+.title-image {
+    display: block;
+    margin: 10px auto;
+    width: 150px;
+}
+
+.profile-image {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    left: calc(50% + 200px);
+    margin: 10px auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.back-button {
+    color: black;
+    margin-top: 15px;
+    font-size: 20px;
+    position: absolute;
+    left: calc(50% - 200px);
+}

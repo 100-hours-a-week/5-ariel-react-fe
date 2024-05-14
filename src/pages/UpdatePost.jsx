@@ -1,12 +1,13 @@
-// UpdatePost.jsx
-
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import FormTitle from '../components/FormTitle';
 import InputTitle from '../components/InputTitle';
-import Textarea from '../components/Textarea';
+import InputTitleArea from '../components/InputTitleArea'
+import InputContentArea from '../components/InputContentArea';
+import InputFile from '../components/InputFile';
 import Button from '../components/Button';
 import '../styles/UpdatePost.css';
+import '../styles/Common.css';
 
 const UpdatePost = () => {
     const [title, setTitle] = useState('');
@@ -55,31 +56,15 @@ const UpdatePost = () => {
                 <form id="updateForm" method="POST">
                     <input type="hidden" id="postId" />
                     <p><InputTitle class="title-input-title" title="제목*" /></p>
-                    <Textarea
-                        className="input-title"
-                        id="titleInput"
-                        value={title}
-                        onChange={handleTitleChange}
-                        maxLength="26"
-                    />
+                    <InputTitleArea value={title} onChange={handleTitleChange} />
                     <p><InputTitle class="title-input-content" title="내용*" /></p>
-                    <Textarea
-                        className="input-content"
-                        id="contentInput"
-                        value={content}
-                        onChange={handleContentChange}
-                    />
+                    <InputContentArea value={content} onChange={handleContentChange} />
                     <p><InputTitle class="title-input-image" title="이미지" /></p>
                     <p>
                         <Button type="button" onClick={() => document.getElementById('fileInput').click()} text="파일 선택" />
                         &nbsp;&nbsp;<small id="fileName">{fileName}</small>
                     </p>
-                    <input
-                        type="file"
-                        id="fileInput"
-                        style={{ display: 'none' }}
-                        onChange={handleFileChange}
-                    />
+                    <InputFile onChange={handleFileChange} />
                     <Button type="button" class="complete-button" onClick={handleSubmit} disabled={!title || !content} text="수정하기"/>
                 </form>
             </section>

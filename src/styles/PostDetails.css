@@ -1,49 +1,8 @@
-/* 스크롤바 숨기기 */
-html::-webkit-scrollbar {
-    display: none;
-}
-
-body {
-    justify-content: center;
-    font-family: "Noto Sans KR", sans-serif;
-    background-color: #F4F5F7;
-}
-
-header {
-    display: flex;
-}
-
 .main {
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     width: 400px;
-}
-
-.title-image {
-    display: block;
-    margin: 10px auto;
-    width: 150px;
-}
-
-.profile-image {
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    left: calc(50% + 200px);
-    margin: 10px auto;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.back-button {
-    color: black;
-    margin-top: 15px;
-    font-size: 20px;
-    position: absolute;
-    /* back-button 요소를 절대 위치로 설정합니다. */
-    left: calc(50% - 200px);
-    /* title-image의 왼쪽에 50px 떨어뜨리려면, title-image의 가로 너비의 절반을 빼고, 50px를 더해야 합니다. */
 }
 
 .post-title {
@@ -77,30 +36,13 @@ header {
     margin-left: 20px;
 }
 
-.edit-buttons {
-    display: flex;
-    position: absolute;
-    right: 0;
-}
-
-.modify-button,
-.delete-button {
-    border-radius: 5px;
-    border: 1px solid #ACA0EB;
-    background-color: transparent;
-    padding: 3px 10px;
-    margin-left: 5px;
-}
-
 hr {
     border-color: #D9D9D9;
     border-width: 0.5px;
 }
 
-button,
 a {
     cursor: pointer;
-    /* 마우스 커서를 포인터로 변경하여 버튼임을 나타냄 */
 }
 
 .post-image {
@@ -146,19 +88,6 @@ a {
     background-color: white;
 }
 
-.comment-register-button {
-    width: 100px;
-    color: white;
-    background-color: #ACA0EB;
-    height: 30px;
-    border: none;
-    box-shadow: none;
-    border-radius: 10px;
-    position: absolute;
-    right: 0;
-    margin-right: 5px;
-}
-
 .current-comment-info {
     display: flex;
     height: 30px;
@@ -167,36 +96,6 @@ a {
 .current-comment-text {
     margin-left: 40px;
     margin-bottom: 20px;
-}
-
-.dropdown {
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    /* 부모 요소 .dropdown을 기준으로 절대 위치로 설정합니다. */
-    background-color: #D9D9D9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    top: 10%;
-    /* 부모 요소 .dropdown 바로 아래에 나타나도록 설정합니다. */
-    left: 55%;
-    /* 부모 요소 .dropdown과 왼쪽 정렬됩니다. */
-    text-align: center;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
 }
 
 .show {
@@ -226,47 +125,23 @@ a {
     height: 150px;
     border-radius: 10px;
     background-color: white;
-    z-index: 51; /* 모달보다 앞에 위치 */
+    z-index: 51;
     display: none;
 }
 
-.dialog .buttons {
+.dialog {
     text-align: center;
-}
-
-.dialog button {
-    margin: 0 5px;
-    width: 25%;
-    padding-top: 7px;
-    padding-bottom: 7px;
-    cursor: pointer;
-    /* 마우스 커서를 포인터로 변경하여 버튼임을 나타냄 */
-}
-
-.dialog .cancel-button {
-    background-color: #242424;
-    color: white;
-    border: none;
-    box-shadow: none;
-    border-radius: 10px;
-}
-
-.dialog .ok-button {
-    background-color: #C4A5FA;
-    border: none;
-    box-shadow: none;
-    border-radius: 10px;
 }
 
 #toastMessage {
     position: fixed;
-    bottom: 20px; /* 화면 하단으로 설정 */
-    left: 50%; /* 가운데 정렬을 위해 왼쪽으로 이동 */
+    bottom: 20px;
+    left: 50%;
     transform: translateX(-50%);
     background-color: #ACA0EB;
     color: white;
     padding: 10px 20px;
     border-radius: 15px;
-    display: none; /* 처음에는 보이지 않도록 설정 */
-    z-index: 9999; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
+    display: none;
+    z-index: 9999;
 }

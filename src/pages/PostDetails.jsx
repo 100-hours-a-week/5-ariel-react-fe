@@ -4,10 +4,12 @@ import Header from '../components/Header';
 import PostDetailInfo from '../components/PostDetailInfo';
 import CommentsBox from '../components/CommentsBox';
 import CommentsInfo from '../components/CommentsInfo';
-import '../styles/PostDetails.css'; // Adjust path as necessary
 import user1 from '../assets/images/user1.png'
 import author1 from '../assets/images/author1.webp'
 import post1 from '../assets/images/post1.jpeg'
+import formatDateTime from '../utils/formatDateTime';
+import '../styles/PostDetails.css'; 
+import '../styles/Common.css';
 
 const PostDetails = () => {
     // 게시글 및 댓글 데이터 설정
@@ -38,25 +40,6 @@ const PostDetails = () => {
             content: "듣는 영화"
         }
     ]);
-
-    const formatDateTime = (date, time) => {
-        // 날짜와 시간을 공백으로 구분하여 ISO 8601 형식의 문자열로 변환
-        const isoDateTimeString = `${date}T${time}`;
-        const dateTime = new Date(isoDateTimeString);
-        // 만약 날짜와 시간이 유효하지 않다면 빈 문자열 반환
-        if (isNaN(dateTime.getTime())) {
-            return '';
-        }
-        // ISO 8601 형식에서 시간 정보를 추출하여 반환
-        const year = dateTime.getFullYear();
-        const month = String(dateTime.getMonth() + 1).padStart(2, '0');
-        const day = String(dateTime.getDate()).padStart(2, '0');
-        const hours = String(dateTime.getHours()).padStart(2, '0');
-        const minutes = String(dateTime.getMinutes()).padStart(2, '0');
-        const seconds = String(dateTime.getSeconds()).padStart(2, '0');
-        // YYYY-MM-DD HH:MM:SS 형식으로 반환
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    };
 
     return (
         <div>

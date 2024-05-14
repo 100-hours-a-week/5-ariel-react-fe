@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import FormTitle from '../components/FormTitle';
 import InputTitle from '../components/InputTitle';
-import Textarea from '../components/Textarea';
+import InputTitleArea from '../components/InputTitleArea';
+import InputContentArea from '../components/InputContentArea';
+import InputFile from '../components/InputFile';
 import Button from '../components/Button';
 import HelperText from '../components/HelperText';
 import '../styles/CreatePost.css';
+import '../styles/Common.css';
 
 
 const CreatePost = () => {
@@ -39,32 +42,16 @@ const CreatePost = () => {
                 <FormTitle class="title-create-post" text="게시글 작성"/>
                 <form>
                     <p><InputTitle class="title-input-title" title="제목*"/></p>
-                    <Textarea
-                        className="input-title"
-                        value={title}
-                        onChange={handleTitleChange}
-                        placeholder="제목을 입력해주세요. (최대 26글자)"
-                        maxLength="26"
-                    />
+                    <InputTitleArea value={title} onChange={handleTitleChange} showPlaceholder={true} />
                     <p><InputTitle class="title-input-content" title="내용*"/></p>
-                    <Textarea
-                        className="input-content"
-                        value={content}
-                        onChange={handleContentChange}
-                        placeholder="내용을 입력해주세요."
-                    />
+                    <InputContentArea value={content} onChange={handleContentChange} showPlaceholder={true}/>
                     <HelperText id="createPostHelperText" text="* helper text"/>
                     <p><InputTitle class="title-input-image" title="이미지"/></p>
                     <p>
                         <Button type="button" onClick={() => document.getElementById('fileInput').click()} text="파일 선택"/>
                         &nbsp;&nbsp;<small id="fileName">{fileName}</small>
                     </p>
-                    <input
-                        type="file"
-                        id="fileInput"
-                        style={{ display: 'none' }}
-                        onChange={handleFileChange}
-                    />
+                    <InputFile onChange={handleFileChange} />
                     <Button class="complete-button" type="button" onClick={handleSubmit} disabled={!title || !content} text="완료"/>
                 </form>
             </section>
