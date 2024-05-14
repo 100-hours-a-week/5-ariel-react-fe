@@ -1,11 +1,15 @@
 import React from 'react';
+import '../styles/SignIn.css';
 
-class HelperText extends React.Component {
-    render() {
-        return (
-            <small id={this.props.id} className="helper-text">{this.props.text}</small>
-        );
-    }
+const HelperText = ({ text, color, visible }) => {
+    return (
+        <small
+            className="helper-text"
+            style={{ color, visibility: visible ? 'visible' : 'hidden' }}
+        >
+            {text}
+        </small>
+    );
 }
 
 export default HelperText;

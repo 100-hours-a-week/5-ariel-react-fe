@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import FormTitle from '../components/FormTitle';
 import InputTitle from '../components/InputTitle';
 import HelperText from '../components/HelperText';
-import Inputs from '../components/Inputs';
 import Button from '../components/Button';
 import HyperlinkText from '../components/HyperlinkText';
 import InputEmail from '../components/InputEmail';
