@@ -23,41 +23,28 @@
 .input-title {
     border: none;
     border-top: 0.5px solid #D9D9D9;
-    /* 위쪽 가로선 스타일 */
     border-bottom: 0.5px solid #D9D9D9;
-    /* 아래쪽 가로선 스타일 */
     padding: 10px;
-    /* 텍스트와 테두리 사이 여백 */
     width: 100%;
-    /* 너비 */
     box-sizing: border-box;
-    /* 테두리를 포함한 요소의 크기 지정 */
     outline: none;
-    /* 포커스 효과 제거 */
     background-color: transparent;
 }
 
 .input-content {
     border: none;
     border-top: 0.5px solid #D9D9D9;
-    /* 위쪽 가로선 스타일 */
     border-bottom: 0.5px solid #D9D9D9;
-    /* 아래쪽 가로선 스타일 */
     padding: 10px;
-    /* 텍스트와 테두리 사이 여백 */
     width: 100%;
-    /* 너비 */
     height: 200px;
     box-sizing: border-box;
-    /* 테두리를 포함한 요소의 크기 지정 */
     outline: none;
-    /* 포커스 효과 제거 */
     background-color: transparent;
 }
 
 a {
     cursor: pointer;
-    /* 마우스 커서를 포인터로 변경하여 버튼임을 나타냄 */
 }
 
 .show {

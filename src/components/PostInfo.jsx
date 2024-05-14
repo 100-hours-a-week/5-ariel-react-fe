@@ -1,23 +1,8 @@
-// PostInfo.jsx
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import formatDateTime from '../utils/formatDateTime';
 
 const PostInfo = ({ post }) => {
-    const formatDateTime = (date, time) => {
-        const isoDateTimeString = `${date}T${time}`;
-        const dateTime = new Date(isoDateTimeString);
-        if (isNaN(dateTime.getTime())) {
-            return '';
-        }
-        const year = dateTime.getFullYear();
-        const month = String(dateTime.getMonth() + 1).padStart(2, '0');
-        const day = String(dateTime.getDate()).padStart(2, '0');
-        const hours = String(dateTime.getHours()).padStart(2, '0');
-        const minutes = String(dateTime.getMinutes()).padStart(2, '0');
-        const seconds = String(dateTime.getSeconds()).padStart(2, '0');
-        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-    };
 
     return (
         <section className="post">

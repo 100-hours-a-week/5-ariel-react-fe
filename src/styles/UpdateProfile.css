@@ -1,7 +1,6 @@
 .modify-profile-form {
     flex-direction: column;
     align-items: center;
-    /* 수정된 부분: 수직 가운데 정렬을 위한 스타일 */
     position: absolute;
     top: 50%;
     left: 50%;
@@ -11,11 +10,8 @@
 
 .title-modify-profile {
     display: inline-block;
-    /* 인라인 블록 요소로 변경 */
     text-align: center;
-    /* 가운데 정렬 적용 */
     width: 100%;
-    /* 가로 너비 조정 */
     font-size: 25px;
 }
 
@@ -46,14 +42,11 @@ a {
     display: block;
     text-align: center;
     text-decoration: none;
-    /* 밑줄 제거 */
     color: black;
-    /* 글자색을 검정색으로 변경 */
 }
 
 a {
     cursor: pointer;
-    /* 마우스 커서를 포인터로 변경하여 버튼임을 나타냄 */
 }
 
 .show {
@@ -69,30 +62,28 @@ a {
 
 #toastMessage {
     position: fixed;
-    bottom: 70px; /* 화면 하단으로 설정 */
-    left: 50%; /* 가운데 정렬을 위해 왼쪽으로 이동 */
+    bottom: 70px;
+    left: 50%;
     transform: translateX(-50%);
     background-color: #ACA0EB;
     color: white;
     padding: 10px 20px;
     border-radius: 20px;
-    display: none; /* 처음에는 보이지 않도록 설정 */
-    z-index: 9999; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
+    display: none;
+    z-index: 9999;
 }
 
-/* 모달 배경 */
 .modal-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 검정 배경 */
-    z-index: 50; /* 모달보다 뒤에 위치 */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 50;
     display: none;
 }
 
-/* 모달 */
 .dialog {
     position: fixed;
     top: 50%;

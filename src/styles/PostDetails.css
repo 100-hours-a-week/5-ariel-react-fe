@@ -125,7 +125,7 @@ a {
     height: 150px;
     border-radius: 10px;
     background-color: white;
-    z-index: 51; /* 모달보다 앞에 위치 */
+    z-index: 51;
     display: none;
 }
 
@@ -135,13 +135,13 @@ a {
 
 #toastMessage {
     position: fixed;
-    bottom: 20px; /* 화면 하단으로 설정 */
-    left: 50%; /* 가운데 정렬을 위해 왼쪽으로 이동 */
+    bottom: 20px;
+    left: 50%;
     transform: translateX(-50%);
     background-color: #ACA0EB;
     color: white;
     padding: 10px 20px;
     border-radius: 15px;
-    display: none; /* 처음에는 보이지 않도록 설정 */
-    z-index: 9999; /* 다른 요소 위에 표시하기 위해 z-index 설정 */
+    display: none;
+    z-index: 9999;
 }

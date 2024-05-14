@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import FormTitle from '../components/FormTitle';
 import InputTitle from '../components/InputTitle';
-import Inputs from '../components/Inputs';
+import InputPassword from '../components/InputPassword';
 import HelperText from '../components/HelperText';
 import Button from '../components/Button';
 import '../styles/UpdatePassword.css';
@@ -15,8 +15,8 @@ const UpdatePassword = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const validatePassword = (isFirstInput) => {
-    // 비밀번호 유효성 검사 로직을 구현하세요.
-    const isValidPassword = password.length >= 8; // 예시: 비밀번호가 8자 이상이어야 함.
+    // 비밀번호 유효성 검사 로직
+    const isValidPassword = password.length >= 8;
     if (isFirstInput) {
       setIsValid(isValidPassword);
     }
@@ -35,7 +35,7 @@ const UpdatePassword = () => {
   const updatePassword = () => {
     if (validatePassword(true) && validateConfirmPassword(true)) {
       console.log('Password updated successfully');
-      // 비밀번호 업데이트 API 호출 로직을 여기에 구현하세요.
+      // 비밀번호 업데이트 API 호출 로직
     }
   };
 
@@ -45,29 +45,27 @@ const UpdatePassword = () => {
 
   const logout = () => {
     console.log('Logging out...');
-    // 로그아웃 로직을 구현하세요.
+    // 로그아웃 로직
   };
 
   return (
     <div>
-      <Header showProfileImage={true}/>
+      <Header showProfileImage={true} />
       <section className="modify-password-form">
-        <FormTitle class="title-modify-password" text="비밀번호 수정"/>
+        <FormTitle class="title-modify-password" text="비밀번호 수정" />
         <form>
           <p>
-          <InputTitle title="비밀번호"/>
-            <Inputs type="password" className="input-text" placeholder="비밀번호를 입력하세요"
-              value={password} onChange={(e) => setPassword(e.target.value)} onInput={() => validatePassword(true)}/>
-            <HelperText text="* helper text"/>
+            <InputTitle title="비밀번호" />
+            <InputPassword value={password} onChange={(e) => setPassword(e.target.value)} onInput={() => validatePassword(true)} />
+            <HelperText text="* helper text" />
           </p>
           <p>
-          <InputTitle title="비밀번호 확인"/>
-            <Inputs type="password" className="input-text" placeholder="비밀번호를 한번 더 입력하세요"
-              value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} onInput={() => validateConfirmPassword(true)}/>
-            <HelperText text="* helper text"/>
+            <InputTitle title="비밀번호 확인" />
+            <InputPassword value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} onInput={() => validateConfirmPassword(true)} name="confirmPassword" id="confirmPasswordInput" placeholder="비밀번호를 한번 더 입력하세요" />
+            <HelperText text="* helper text" />
           </p>
           <p>
-            <Button class="modify-password-button" type="button" onClick={updatePassword} disabled={!isValid} text="수정하기"/>
+            <Button class="modify-password-button" type="button" onClick={updatePassword} disabled={!isValid} text="수정하기" />
           </p>
         </form>
       </section>

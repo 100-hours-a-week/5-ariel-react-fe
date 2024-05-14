@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import FormTitle from '../components/FormTitle';
 import InputTitle from '../components/InputTitle';
-import Inputs from '../components/Inputs';
+import InputNickname from '../components/InputNickname';
 import ProfileImage from '../assets/images/modify-profile-image.png'
 import HelperText from '../components/HelperText';
 import Button from '../components/Button';
+import InputFile from '../components/InputFile';
 import '../styles/UpdateProfile.css';
 import '../styles/Common.css';
 
@@ -54,12 +55,12 @@ const UpdateProfile = () => {
           <InputTitle title="프로필 사진*"/>
           <label className="profile-image-button">
             <img src={ProfileImage} className="modify-profile-image" alt="modify profile image"/>
-            <Inputs type="file" accept="image/*" style={{ display: 'none' }}/>
+            <InputFile />
           </label>
           <InputTitle title="이메일"/>
           <div id="currentEmail">startupcode@gmail.com</div>
           <InputTitle title="닉네임"/>
-          <Inputs type="text" class="input-name" value={nickname} placeholder="스타트업코드" onChange={handleNicknameChange}/>
+          <InputNickname value={nickname} onChange={handleNicknameChange} placeholder="스타트업코드"/>
           <HelperText text="* helper text"/>
           <Button class="modify-profile-button" type="button" onClick={updateProfile} text="수정하기"/>
 

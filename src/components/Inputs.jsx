@@ -14,6 +14,7 @@ class Inputs extends React.Component {
                 value={this.props.value}
                 onChange={this.props.onChange}
                 onInput={this.props.onInput}
+                accept={this.props.accept}
             />
         );
     }

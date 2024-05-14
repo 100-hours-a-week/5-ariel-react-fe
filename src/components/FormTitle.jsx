@@ -1,5 +1,3 @@
-// FormTitle.jsx
-
 import React from 'react';
 
 class FormTitle extends React.Component {
