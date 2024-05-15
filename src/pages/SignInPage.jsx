@@ -97,14 +97,13 @@ const SignInPage = () => {
         <>
             <Header />
             <section className="login-form">
-                <FormTitle class="title-login" text="로그인" />
+                <FormTitle className="title-login" text="로그인" />
                 <form id="loginForm" onSubmit={handleSubmit}>
                     <InputTitle title="이메일" />
                     <InputEmail name="email" value={email} onChange={handleChange} />
                     <InputTitle title="비밀번호" />
                     <InputPassword name="password" value={password} onChange={handleChange} />
-                    <HelperText text={helperText.text} color={helperText.color} visible={helperText.visible}
-                    />
+                    <HelperText text={helperText.text} color={helperText.color} visible={helperText.visible}/>
                     <Button id="loginButton" type="submit" disabled={!isValid} text="로그인" />
                     <HyperlinkText to="/sign-up" text="회원가입" />
                 </form>
