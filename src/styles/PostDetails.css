@@ -114,33 +114,6 @@ a {
     display: none;
 }
 
-/* 모달 */
-.dialog {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    width: 300px;
-    height: 150px;
-    border-radius: 10px;
-    background-color: white;
-    z-index: 51;
-    display: none;
-}
-
-.modal-background.visible {
-    display: block;
-}
-
-.dialog.visible {
-    display: block;
-}
-
-.dialog {
-    text-align: center;
-}
-
 #toastMessage {
     position: fixed;
     bottom: 20px;
