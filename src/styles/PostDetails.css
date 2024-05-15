@@ -129,6 +129,14 @@ a {
     display: none;
 }
 
+.modal-background.visible {
+    display: block;
+}
+
+.dialog.visible {
+    display: block;
+}
+
 .dialog {
     text-align: center;
 }
