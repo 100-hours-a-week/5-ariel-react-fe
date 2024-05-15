@@ -5,7 +5,7 @@ class Button extends React.Component {
     render() {
         let buttonStyle = {};
 
-        if (this.props.id === "loginButton" || this.props.id === "signupButton" || this.props.id === "create-post-button") {
+        if (this.props.id === "loginButton" || this.props.id === "signupButton" || this.props.id === "create-post-button" || this.props.id === "update-post-button") {
             buttonStyle = {
                 backgroundColor: this.props.disabled ? '#ACA0EB' : '#7F6AEE',
                 color: 'white',
@@ -14,7 +14,7 @@ class Button extends React.Component {
                 padding: '10px',
                 marginTop: '40px',
                 cursor: this.props.disabled ? 'not-allowed' : 'pointer',
-                width: this.props.id === "create-post-button" ? '70%' : '100%',
+                width: this.props.id === "create-post-button" || this.props.id === "update-post-button" ? '70%' : '100%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
