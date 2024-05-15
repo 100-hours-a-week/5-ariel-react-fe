@@ -1,6 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PostDetailInfo = ({ post, formatDateTime, showPostDeleteModal, comments }) => {
+    const navigate = useNavigate();
+
+    const handleEditClick = () => {
+        const fileName = post.image.split('/').pop(); // 이미지 URL에서 파일명 추출
+        navigate(`/update-post/${post.id}`, { state: { post, fileName } });
+    };
+
     return (
         <section className="text" id="postDetails">
             <h1 className="post-title">{post.title}</h1>
@@ -9,7 +17,7 @@ const PostDetailInfo = ({ post, formatDateTime, showPostDeleteModal, comments })
                 <div className="author-name"><small><b>{post.author.nickname}</b></small></div>
                 <div className="post-date"><small>{formatDateTime(post.date, post.time)}</small></div>
                 <div className="edit-buttons">
-                    <a href={`update-post?id=${post.id}`}><button className="modify-button">수정</button></a>
+                    <button className="modify-button" onClick={handleEditClick}>수정</button>
                     <button className="delete-button" onClick={showPostDeleteModal}>삭제</button>
                 </div>
             </div>
