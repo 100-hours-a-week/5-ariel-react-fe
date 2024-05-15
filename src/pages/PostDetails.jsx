@@ -3,15 +3,15 @@ import Header from '../components/Header';
 import PostDetailInfo from '../components/PostDetailInfo';
 import CommentsBox from '../components/CommentsBox';
 import CommentsInfo from '../components/CommentsInfo';
-import user1 from '../assets/images/user1.png'
-import author1 from '../assets/images/author1.webp'
-import post1 from '../assets/images/post1.jpeg'
+import Modal from '../components/Modal';
+import user1 from '../assets/images/user1.png';
+import author1 from '../assets/images/author1.webp';
+import post1 from '../assets/images/post1.jpeg';
 import formatDateTime from '../utils/formatDateTime';
-import '../styles/PostDetails.css'; 
+import '../styles/PostDetails.css';
 import '../styles/Common.css';
 
 const PostDetails = () => {
-    // 게시글 및 댓글 데이터 설정
     const [post, setPost] = useState({
         id: 1,
         title: "Hollywood",
@@ -40,6 +40,88 @@ const PostDetails = () => {
         }
     ]);
 
+    const [isPostDeleteModalVisible, setIsPostDeleteModalVisible] = useState(false);
+    const [isCommentDeleteModalVisible, setIsCommentDeleteModalVisible] = useState(false);
+    const [isWithdrawModalVisible, setIsWithdrawModalVisible] = useState(false);
+
+    const showPostDeleteModal = () => {
+        setIsPostDeleteModalVisible(true);
+        document.body.style.overflow = 'hidden'; // 백그라운드 스크롤 방지
+    };
+
+    const hidePostDeleteModal = () => {
+        setIsPostDeleteModalVisible(false);
+        document.body.style.overflow = ''; // 백그라운드 스크롤 재개
+    };
+
+    const confirmDeletePost = () => {
+        // 게시글 삭제 로직 추가
+        hidePostDeleteModal();
+    };
+
+    const showCommentDeleteModal = () => {
+        setIsCommentDeleteModalVisible(true);
+        document.body.style.overflow = 'hidden'; // 백그라운드 스크롤 방지
+    };
+
+    const hideCommentDeleteModal = () => {
+        setIsCommentDeleteModalVisible(false);
+        document.body.style.overflow = ''; // 백그라운드 스크롤 재개
+    };
+
+    const confirmDeleteComment = () => {
+        // 댓글 삭제 로직 추가
+        hideCommentDeleteModal();
+    };
+
+    const showWithdrawModal = () => {
+        setIsWithdrawModalVisible(true);
+        document.body.style.overflow = 'hidden'; // 백그라운드 스크롤 방지
+    };
+
+    const hideWithdrawModal = () => {
+        setIsWithdrawModalVisible(false);
+        document.body.style.overflow = ''; // 백그라운드 스크롤 재개
+    };
+
+    const confirmWithdraw = () => {
+        // 회원탈퇴 로직 추가
+        hideWithdrawModal();
+    };
+
+    const editComment = (commentId, commentContent) => {
+        const inputComment = document.querySelector('.input-comment');
+        const registerButton = document.querySelector('.comment-register-button');
+        const postId = post.id; // 게시글 id를 가져옴
+
+        inputComment.value = commentContent;
+        registerButton.textContent = '댓글 수정';
+
+        const updateCommentHandler = () => {
+            const updatedCommentContent = inputComment.value;
+            updateComment(postId, commentId, updatedCommentContent);
+            
+            // 댓글 수정 후 버튼 텍스트와 입력 필드를 초기화
+            inputComment.value = '';
+            registerButton.textContent = '댓글 등록';
+            registerButton.removeEventListener('click', updateCommentHandler);
+        };
+
+        registerButton.addEventListener('click', updateCommentHandler);
+    };
+
+    const updateComment = (postId, commentId, updatedCommentContent) => {
+        // 댓글 수정 로직 추가
+        console.log(`Post ID: ${postId}, Comment ID: ${commentId}, Updated Content: ${updatedCommentContent}`);
+
+        // 임시 코드 (실제로 데이터가 변화하진 않음)
+        setComments((prevComments) =>
+            prevComments.map((comment) =>
+                comment.id === commentId ? { ...comment, content: updatedCommentContent } : comment
+            )
+        );
+    };
+
     return (
         <div>
             <Header showBackButton={true} showProfileImage={true} />
@@ -47,17 +129,41 @@ const PostDetails = () => {
                 <PostDetailInfo
                     post={post}
                     formatDateTime={formatDateTime}
-                    // showPostDeleteModal={showPostDeleteModal}
+                    showPostDeleteModal={showPostDeleteModal}
                     comments={comments}
                 />
                 <CommentsBox />
-                <CommentsInfo 
-                    comments={comments} 
-                    formatDateTime={formatDateTime} 
-                    // editComment={editComment} 
-                    // showCommentDeleteModal={showCommentDeleteModal}
+                <CommentsInfo
+                    comments={comments}
+                    formatDateTime={formatDateTime}
+                    editComment={editComment}
+                    showCommentDeleteModal={showCommentDeleteModal}
                 />
             </section>
+
+            <Modal 
+                isVisible={isPostDeleteModalVisible} 
+                title="게시글을 삭제하시겠습니까?" 
+                content="삭제한 내용은 복구 할 수 없습니다." 
+                onCancel={hidePostDeleteModal} 
+                onConfirm={confirmDeletePost} 
+            />
+
+            <Modal 
+                isVisible={isCommentDeleteModalVisible} 
+                title="댓글을 삭제하시겠습니까?" 
+                content="삭제한 내용은 복구 할 수 없습니다." 
+                onCancel={hideCommentDeleteModal} 
+                onConfirm={confirmDeleteComment} 
+            />
+
+            <Modal 
+                isVisible={isWithdrawModalVisible} 
+                title="회원탈퇴 하시겠습니까?" 
+                content="작성된 게시글과 댓글은 삭제됩니다." 
+                onCancel={hideWithdrawModal} 
+                onConfirm={() => { hideWithdrawModal(); confirmWithdraw(); }} 
+            />
         </div>
     );
 };

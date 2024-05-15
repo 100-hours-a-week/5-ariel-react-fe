@@ -103,7 +103,7 @@ class ListOfPosts extends React.Component {
                         <p>안녕하세요,<br />아무 말 대잔치 <b>게시판</b> 입니다.</p>
                     </section>
                     <section className="create-post">
-                        <Link to="/create-post"><Button class="create-post-button" text="게시글 작성"/></Link>
+                        <Link to="/create-post"><Button className="create-post-button" text="게시글 작성"/></Link>
                     </section>
                     <section className="posts" id="postList">
                         {/* 게시글 목록을 동적으로 렌더링하는 부분 */}
