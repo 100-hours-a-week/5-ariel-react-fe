@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import FormTitle from '../components/FormTitle';
 import InputTitle from '../components/InputTitle';
@@ -10,11 +11,16 @@ import HelperText from '../components/HelperText';
 import '../styles/CreatePost.css';
 import '../styles/Common.css';
 
-
 const CreatePost = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [fileName, setFileName] = useState('파일을 선택해주세요.');
+    const [isValid, setIsValid] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        validateForm();
+    }, [title, content]);
 
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
@@ -31,36 +37,54 @@ const CreatePost = () => {
         }
     };
 
-    const handleSubmit = () => {
-        // 게시글 작성 완료 처리
+    const validateForm = () => {
+        const isTitleValid = title.trim() !== '';
+        const isContentValid = content.trim() !== '';
+        setIsValid(isTitleValid && isContentValid);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (isValid) {
+            alert('게시글 작성 완료');
+            navigate('/list-of-posts');
+        }
     };
 
     return (
         <div>
-            <Header showBackButton="true" showProfileImage="true"/>
+            <Header showBackButton={true} showProfileImage={true} />
             <section className="create-post-form">
-                <FormTitle class="title-create-post" text="게시글 작성"/>
-                <form>
-                    <p><InputTitle class="title-input-title" title="제목*"/></p>
+                <FormTitle className="title-create-post" text="게시글 작성" />
+                <form onSubmit={handleSubmit}>
+                    <p><InputTitle className="title-input-title" title="제목*" /></p>
                     <InputTitleArea value={title} onChange={handleTitleChange} showPlaceholder={true} />
-                    <p><InputTitle class="title-input-content" title="내용*"/></p>
-                    <InputContentArea value={content} onChange={handleContentChange} showPlaceholder={true}/>
-                    <HelperText id="createPostHelperText" text="* helper text"/>
-                    <p><InputTitle class="title-input-image" title="이미지"/></p>
+                    <p><InputTitle className="title-input-content" title="내용*" /></p>
+                    <InputContentArea value={content} onChange={handleContentChange} showPlaceholder={true} />
+                    <br></br>
+                    <HelperText 
+                        id="createPostHelperText" 
+                        text="* 제목과 내용을 모두 작성해주세요." 
+                        color="red" 
+                        visible={!isValid}
+                    />
+                    <p><InputTitle className="title-input-image" title="이미지" /></p>
                     <p>
-                        <Button type="button" onClick={() => document.getElementById('fileInput').click()} text="파일 선택"/>
+                        <Button type="button" onClick={() => document.getElementById('fileInput').click()} text="파일 선택" />
                         &nbsp;&nbsp;<small id="fileName">{fileName}</small>
                     </p>
-                    <InputFile onChange={handleFileChange} />
-                    <Button class="complete-button" type="button" onClick={handleSubmit} disabled={!title || !content} text="완료"/>
+                    <InputFile id="fileInput" onChange={handleFileChange} />
+                    <Button 
+                        id="create-post-button"
+                        className="complete-button" 
+                        type="submit" 
+                        disabled={!isValid} 
+                        text="완료" 
+                    />
                 </form>
             </section>
         </div>
     );
-};
-
-const logout = () => {
-    // 로그아웃 처리
 };
 
 export default CreatePost;
