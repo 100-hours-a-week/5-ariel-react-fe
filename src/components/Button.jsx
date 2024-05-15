@@ -5,7 +5,7 @@ class Button extends React.Component {
     render() {
         let buttonStyle = {};
 
-        if (this.props.id === "loginButton" || this.props.id === "signupButton" || this.props.id === "create-post-button" || this.props.id === "update-post-button") {
+        if (this.props.id === "loginButton" || this.props.id === "signupButton" || this.props.id === "create-post-button" || this.props.id === "update-post-button" || this.props.id === "modify-profile-button") {
             buttonStyle = {
                 backgroundColor: this.props.disabled ? '#ACA0EB' : '#7F6AEE',
                 color: 'white',

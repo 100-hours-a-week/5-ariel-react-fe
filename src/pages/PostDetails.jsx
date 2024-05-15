@@ -74,20 +74,6 @@ const PostDetails = () => {
         hideCommentDeleteModal();
     };
 
-    const showWithdrawModal = () => {
-        setIsWithdrawModalVisible(true);
-        document.body.style.overflow = 'hidden'; // 백그라운드 스크롤 방지
-    };
-
-    const hideWithdrawModal = () => {
-        setIsWithdrawModalVisible(false);
-        document.body.style.overflow = ''; // 백그라운드 스크롤 재개
-    };
-
-    const confirmWithdraw = () => {
-        // 회원탈퇴 로직 추가
-        hideWithdrawModal();
-    };
 
     const editComment = (commentId, commentContent) => {
         const inputComment = document.querySelector('.input-comment');
@@ -155,14 +141,6 @@ const PostDetails = () => {
                 content="삭제한 내용은 복구 할 수 없습니다." 
                 onCancel={hideCommentDeleteModal} 
                 onConfirm={confirmDeleteComment} 
-            />
-
-            <Modal 
-                isVisible={isWithdrawModalVisible} 
-                title="회원탈퇴 하시겠습니까?" 
-                content="작성된 게시글과 댓글은 삭제됩니다." 
-                onCancel={hideWithdrawModal} 
-                onConfirm={() => { hideWithdrawModal(); confirmWithdraw(); }} 
             />
         </div>
     );
