@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Header from '../components/Header';
 import FormTitle from '../components/FormTitle';
 import InputTitle from '../components/InputTitle';
@@ -71,7 +72,7 @@ const SignInPage = () => {
         return passwordRegex.test(password);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const validationMessage = validation(email, password);
         if (validationMessage) {
@@ -81,15 +82,21 @@ const SignInPage = () => {
         loginUser(email, password);
     }
 
-    const loginUser = (email, password) => {
-        if (validation(email, password) === '') {
-            sessionStorage.setItem('loggedInUser', email);
-            setHelperText({ visible: true, text: '* 성공', color: 'blue' });
-            setTimeout(() => {
-                window.location.href = "/list-of-posts";
-            }, 3000);
-        } else {
-            setHelperText({ visible: true, text: '* 이메일 또는 비밀번호를 다시 확인해주세요.', color: 'red' });
+    const loginUser = async (email, password) => {
+        try {
+            const response = await axios.post('http://localhost:3001/login', { email, password }, { withCredentials: true });
+            if (response.data.success) {
+                sessionStorage.setItem('loggedInUser', email);
+                setHelperText({ visible: true, text: '* 성공', color: 'blue' });
+                setTimeout(() => {
+                    window.location.href = "/list-of-posts";
+                }, 3000);
+            } else {
+                setHelperText({ visible: true, text: '* 이메일 또는 비밀번호를 다시 확인해주세요.', color: 'red' });
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+            setHelperText({ visible: true, text: '* 서버 오류가 발생했습니다.', color: 'red' });
         }
     }
 

@@ -74,6 +74,11 @@ const PostDetails = () => {
         hideCommentDeleteModal();
     };
 
+    const registerComment = () => {
+        const inputComment = document.querySelector('.input-comment');
+
+        inputComment.value = '';
+    }
 
     const editComment = (commentId, commentContent) => {
         const inputComment = document.querySelector('.input-comment');
@@ -118,7 +123,7 @@ const PostDetails = () => {
                     showPostDeleteModal={showPostDeleteModal}
                     comments={comments}
                 />
-                <CommentsBox />
+                <CommentsBox onCommentSubmit={registerComment}/>
                 <CommentsInfo
                     comments={comments}
                     formatDateTime={formatDateTime}
