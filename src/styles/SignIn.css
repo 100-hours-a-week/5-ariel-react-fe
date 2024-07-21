@@ -45,18 +45,6 @@ a {
     /* margin-bottom: 20px; */
 }
 
-.icons {
-    position: relative;
-    top: 5px;
-    width: 30px;
-}
-
-.icons2 {
-    position: relative;
-    top: 10px;
-    width: 30px;
-}
-
 #login-button {
     width: 100%;
     color: white;

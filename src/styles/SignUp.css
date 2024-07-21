@@ -13,6 +13,7 @@
     text-align: center;
     width: 100%;
     font-size: 25px;
+    margin-bottom: 0px;
 }
 
 input[type="text"], input[type="password"] {
@@ -22,14 +23,14 @@ input[type="text"], input[type="password"] {
 .signup-form .input-text {
     height: 25px;
     margin-top: 5px;
-    background-color: transparent;
+    background-color: white;
     border-radius: 5px;
     border: 1px solid;
 }
 
 .signup-form .input-titles {
     font-size: 15px;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 #titleEmail {
@@ -52,7 +53,7 @@ a {
 }
 
 .plus-sign {
-    width: 15px;
+    width: 10px;
 }
 
 .helper-text {
