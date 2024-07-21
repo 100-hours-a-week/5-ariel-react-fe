@@ -6,5 +6,6 @@ html::-webkit-scrollbar {
 body {
     justify-content: center;
     font-family: "Noto Sans KR", sans-serif;
-    background-color: #F4F5F7;
+    background-image: url('../assets/images/blue_background.avif');
+    background-size: cover;
 }
