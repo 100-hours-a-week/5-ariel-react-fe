@@ -64,7 +64,7 @@ const SignUpPage = () => {
         }
     };
 
-    const validateEmail = (showError = false) => {
+    const validateEmail = async (showError = false) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         let text = '';
         let color = 'red';
@@ -74,10 +74,22 @@ const SignUpPage = () => {
         } else if (!emailRegex.test(email)) {
             if (showError) text = '* 올바른 이메일 주소 형식을 입력해주세요.';
         } else {
-            text = '유효한 이메일입니다.';
-            color = 'blue';
-            setEmailHelperText({ text, color });
-            return true;
+            try {
+                const response = await fetch("http://localhost:3001/users");
+                const data = await response.json();
+                const existingEmail = data.find(user => user.email === email);
+                if (existingEmail) {
+                    if (showError) text = '* 중복된 이메일입니다.';
+                } else {
+                    text = '유효한 이메일입니다.';
+                    color = 'blue';
+                    setEmailHelperText({ text, color });
+                    return true;
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("회원가입 중 오류가 발생했습니다.");
+            }
         }
 
         setEmailHelperText({ text, color });
@@ -123,7 +135,7 @@ const SignUpPage = () => {
         return false;
     };
 
-    const validateNickname = (showError = false) => {
+    const validateNickname = async (showError = false) => {
         let text = '';
         let color = 'red';
 
@@ -134,40 +146,73 @@ const SignUpPage = () => {
         } else if (nickname.length > 10) {
             if (showError) text = '* 닉네임은 최대 10자까지 작성 가능합니다.';
         } else {
-            text = '유효한 닉네임입니다.';
-            color = 'blue';
-            setNicknameHelperText({ text, color });
-            return true;
+            try {
+                const response = await fetch("http://localhost:3001/users");
+                const data = await response.json();
+                const existingNickname = data.find(user => user.nickname === nickname);
+                if (existingNickname) {
+                    if (showError) text = '* 중복된 닉네임입니다.';
+                } else {
+                    text = '유효한 닉네임입니다.';
+                    color = 'blue';
+                    setNicknameHelperText({ text, color });
+                    return true;
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("회원가입 중 오류가 발생했습니다.");
+            }
         }
 
         setNicknameHelperText({ text, color });
         return false;
     };
 
-    const validateForm = () => {
-        const emailValid = validateEmail(true);
+    const validateForm = async () => {
+        const emailValid = await validateEmail(true);
         const passwordValid = validatePassword(true);
         const confirmPasswordValid = validateConfirmPassword(true);
-        const nicknameValid = validateNickname(true);
+        const nicknameValid = await validateNickname(true);
         const profileImageValid = profileImageFile !== null;
 
         const isValid = emailValid && passwordValid && confirmPasswordValid && nicknameValid && profileImageValid;
         setIsValid(isValid);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const emailValid = validateEmail(false);
+        const emailValid = await validateEmail(false);
         const passwordValid = validatePassword(false);
         const confirmPasswordValid = validateConfirmPassword(false);
-        const nicknameValid = validateNickname(false);
+        const nicknameValid = await validateNickname(false);
         const profileImageValid = profileImageFile !== null;
 
         if (emailValid && passwordValid && confirmPasswordValid && nicknameValid && profileImageValid) {
-            alert("회원가입 성공!");
-            navigate('/sign-in');
+            try {
+                const formData = new FormData();
+                formData.append('email', email);
+                formData.append('password', password);
+                formData.append('nickname', nickname);
+                formData.append('profile_picture', profileImageFile);
+
+                const response = await fetch('http://localhost:3001/signup', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.status === 201) {
+                    alert("회원가입 성공!");
+                    navigate('/sign-in');
+                } else {
+                    alert("회원가입에 실패했습니다.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("회원가입 중 오류가 발생했습니다.");
+            }
         } else {
+            validateForm();
             setProfileImageHelperText({ text: '* 프로필 사진을 추가해주세요.', color: 'red' });
         }
     };

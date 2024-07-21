@@ -42,5 +42,28 @@ a {
 .helper-text {
     color: red;
     visibility: hidden;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
+}
+
+.icons {
+    position: relative;
+    top: 5px;
+    width: 30px;
+}
+
+.icons2 {
+    position: relative;
+    top: 10px;
+    width: 30px;
+}
+
+#login-button {
+    width: 100%;
+    color: white;
+    background-color: #7fb3f3;
+    height: 30px;
+    border: none;
+    box-shadow: none;
+    border-radius: 5px;
+    margin-top: 20px;
 }
