@@ -1,256 +1,289 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import profileImage from '../assets/images/button-add-profile-image.png'; // 이미지 import 추가
-import Header from '../components/Header';
-import FormTitle from '../components/FormTitle';
-import InputTitle from '../components/InputTitle';
-import HelperText from '../components/HelperText';
-import Button from '../components/Button';
-import HyperlinkText from '../components/HyperlinkText';
-import InputEmail from '../components/InputEmail';
-import InputPassword from '../components/InputPassword';
-import InputNickname from '../components/InputNickname';
-import InputFile from '../components/InputFile';
 import '../styles/SignUp.css';
-import '../styles/Common.css';
+import BackButtonImage from '../assets/images/back-button.png';
+import TitleImage from '../assets/images/title.png';
+import BubblesImage from '../assets/images/bubbles.png';
+import WhaleImage from '../assets/images/whale.png';
+import FishImage from '../assets/images/fish.png';
+import TurtleImage from '../assets/images/turtle.png';
+import ClamImage from '../assets/images/clam.png';
+import SharkImage from '../assets/images/shark.png';
+import AddProfileImage from '../assets/images/button-add-profile-image.png';
 
 const SignUpPage = () => {
+    const [profileImage, setProfileImage] = useState(null);
+    const [profilePreview, setProfilePreview] = useState(AddProfileImage);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [nickname, setNickname] = useState('');
-    const [profileImageFile, setProfileImageFile] = useState(null);
-    const [profileImageUrl, setProfileImageUrl] = useState(profileImage);
+    const [helperTexts, setHelperTexts] = useState({
+        profileImage: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        nickname: ''
+    });
     const [isValid, setIsValid] = useState(false);
-    const [emailHelperText, setEmailHelperText] = useState({ text: '', color: 'red' });
-    const [passwordHelperText, setPasswordHelperText] = useState({ text: '', color: 'red' });
-    const [confirmPasswordHelperText, setConfirmPasswordHelperText] = useState({ text: '', color: 'red' });
-    const [nicknameHelperText, setNicknameHelperText] = useState({ text: '', color: 'red' });
-    const [profileImageHelperText, setProfileImageHelperText] = useState({ text: '* 프로필 사진을 추가해주세요.', color: 'red' });
-    const navigate = useNavigate();
 
     useEffect(() => {
-        validateForm();
-    }, [email, password, confirmPassword, nickname, profileImageFile]);
+        validateAllInputs();
+    }, [email, password, confirmPassword, nickname, profileImage]);
 
-    useEffect(() => {
-        if (profileImageUrl === profileImage) {
-            setProfileImageHelperText({ text: '* 프로필 사진을 추가해주세요.', color: 'red' });
-        } else {
-            setProfileImageHelperText({ text: '', color: 'red' });
-        }
-    }, [profileImageUrl]);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        if (name === 'email') setEmail(value);
-        if (name === 'password') setPassword(value);
-        if (name === 'confirmPassword') setConfirmPassword(value);
-        if (name === 'nickname') setNickname(value);
-    };
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
+    const handleProfileImageChange = (event) => {
+        const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                setProfileImageUrl(e.target.result);
-                setProfileImageFile(file);
+                setProfilePreview(e.target.result);
             };
             reader.readAsDataURL(file);
+            setHelperTexts((prev) => ({ ...prev, profileImage: '' }));
         } else {
-            setProfileImageUrl(profileImage);
-            setProfileImageFile(null);
+            setProfilePreview(AddProfileImage);
+            setHelperTexts((prev) => ({ ...prev, profileImage: '* 프로필 사진을 추가해주세요.' }));
         }
+        setProfileImage(file);
     };
 
     const validateEmail = async (showError = false) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        let text = '';
-        let color = 'red';
-
         if (!email.trim()) {
-            if (showError) text = '* 이메일을 입력해주세요.';
-        } else if (!emailRegex.test(email)) {
-            if (showError) text = '* 올바른 이메일 주소 형식을 입력해주세요.';
+            if (showError) setHelperTexts((prev) => ({ ...prev, email: '* 이메일을 입력해주세요.' }));
+            return false;
+        } else if (!emailRegex.test(email.trim())) {
+            if (showError) setHelperTexts((prev) => ({ ...prev, email: '* 올바른 이메일 주소 형식을 입력해주세요.' }));
+            return false;
         } else {
             try {
-                const response = await fetch("http://localhost:3001/users");
+                const response = await fetch("http://localhost:8080/auth/users");
+                if (!response.ok) throw new Error('Failed to fetch users');
+                
                 const data = await response.json();
-                const existingEmail = data.find(user => user.email === email);
-                if (existingEmail) {
-                    if (showError) text = '* 중복된 이메일입니다.';
+                console.log("Fetched users:", data); // Add logging here
+
+                if (data.some(user => user.email === email.trim())) {
+                    if (showError) setHelperTexts((prev) => ({ ...prev, email: '* 중복된 이메일입니다.' }));
+                    return false;
                 } else {
-                    text = '유효한 이메일입니다.';
-                    color = 'blue';
-                    setEmailHelperText({ text, color });
+                    setHelperTexts((prev) => ({ ...prev, email: '' }));
                     return true;
                 }
             } catch (error) {
-                console.error("Error:", error);
-                alert("회원가입 중 오류가 발생했습니다.");
+                console.error("Error during email validation:", error);
+                if (showError) alert("이메일 유효성 검사 중 오류가 발생했습니다.");
+                return false;
             }
         }
-
-        setEmailHelperText({ text, color });
-        return false;
     };
 
-    const validatePassword = (showError = false) => {
+    const validatePassword = async (showError = false) => {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
-        let text = '';
-        let color = 'red';
-
         if (!password.trim()) {
-            if (showError) text = '* 비밀번호를 입력해주세요.';
-        } else if (!passwordRegex.test(password)) {
-            if (showError) text = '* 비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.';
+            if (showError) setHelperTexts((prev) => ({ ...prev, password: '* 비밀번호를 입력해주세요.' }));
+            return false;
+        } else if (!passwordRegex.test(password.trim())) {
+            if (showError) setHelperTexts((prev) => ({
+                ...prev,
+                password: '* 비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.'
+            }));
+            return false;
         } else {
-            text = '유효한 비밀번호입니다.';
-            color = 'blue';
-            setPasswordHelperText({ text, color });
+            setHelperTexts((prev) => ({ ...prev, password: '' }));
             return true;
         }
-
-        setPasswordHelperText({ text, color });
-        return false;
     };
 
-    const validateConfirmPassword = (showError = false) => {
-        let text = '';
-        let color = 'red';
-
+    const validateConfirmPassword = async (showError = false) => {
         if (!confirmPassword.trim()) {
-            if (showError) text = '* 비밀번호를 한번 더 입력해주세요.';
-        } else if (password !== confirmPassword) {
-            if (showError) text = '* 비밀번호가 다릅니다.';
+            if (showError) setHelperTexts((prev) => ({ ...prev, confirmPassword: '* 비밀번호를 한번 더 입력해주세요.' }));
+            return false;
+        } else if (confirmPassword.trim() !== password.trim()) {
+            if (showError) setHelperTexts((prev) => ({ ...prev, confirmPassword: '* 비밀번호가 다릅니다.' }));
+            return false;
         } else {
-            text = '비밀번호가 일치합니다.';
-            color = 'blue';
-            setConfirmPasswordHelperText({ text, color });
+            setHelperTexts((prev) => ({ ...prev, confirmPassword: '' }));
             return true;
         }
-
-        setConfirmPasswordHelperText({ text, color });
-        return false;
     };
 
     const validateNickname = async (showError = false) => {
-        let text = '';
-        let color = 'red';
-
         if (!nickname.trim()) {
-            if (showError) text = '* 닉네임을 입력해주세요.';
-        } else if (nickname.includes(' ')) {
-            if (showError) text = '* 띄어쓰기를 없애주세요.';
-        } else if (nickname.length > 10) {
-            if (showError) text = '* 닉네임은 최대 10자까지 작성 가능합니다.';
+            if (showError) setHelperTexts((prev) => ({ ...prev, nickname: '* 닉네임을 입력해주세요.' }));
+            return false;
+        } else if (nickname.trim().includes(' ')) {
+            if (showError) setHelperTexts((prev) => ({ ...prev, nickname: '* 띄어쓰기를 없애주세요.' }));
+            return false;
+        } else if (nickname.trim().length > 10) {
+            if (showError) setHelperTexts((prev) => ({ ...prev, nickname: '* 닉네임은 최대 10자까지 작성 가능합니다.' }));
+            return false;
         } else {
             try {
-                const response = await fetch("http://localhost:3001/users");
+                const response = await fetch("http://localhost:8080/auth/users");
+                if (!response.ok) throw new Error('Failed to fetch users');
+                
                 const data = await response.json();
-                const existingNickname = data.find(user => user.nickname === nickname);
-                if (existingNickname) {
-                    if (showError) text = '* 중복된 닉네임입니다.';
+                console.log("Fetched users:", data); // Add logging here
+
+                if (data.some(user => user.nickname === nickname.trim())) {
+                    if (showError) setHelperTexts((prev) => ({ ...prev, nickname: '* 중복된 닉네임입니다.' }));
+                    return false;
                 } else {
-                    text = '유효한 닉네임입니다.';
-                    color = 'blue';
-                    setNicknameHelperText({ text, color });
+                    setHelperTexts((prev) => ({ ...prev, nickname: '' }));
                     return true;
                 }
             } catch (error) {
-                console.error("Error:", error);
-                alert("회원가입 중 오류가 발생했습니다.");
+                console.error("Error during nickname validation:", error);
+                if (showError) alert("닉네임 유효성 검사 중 오류가 발생했습니다.");
+                return false;
             }
         }
-
-        setNicknameHelperText({ text, color });
-        return false;
     };
 
-    const validateForm = async () => {
-        const emailValid = await validateEmail(true);
-        const passwordValid = validatePassword(true);
-        const confirmPasswordValid = validateConfirmPassword(true);
-        const nicknameValid = await validateNickname(true);
-        const profileImageValid = profileImageFile !== null;
+    const validateAllInputs = async () => {
+        const emailValid = await validateEmail();
+        const passwordValid = await validatePassword();
+        const confirmPasswordValid = await validateConfirmPassword();
+        const nicknameValid = await validateNickname();
+        const profileImageValid = !!profileImage;
 
-        const isValid = emailValid && passwordValid && confirmPasswordValid && nicknameValid && profileImageValid;
-        setIsValid(isValid);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const emailValid = await validateEmail(false);
-        const passwordValid = validatePassword(false);
-        const confirmPasswordValid = validateConfirmPassword(false);
-        const nicknameValid = await validateNickname(false);
-        const profileImageValid = profileImageFile !== null;
+        setHelperTexts((prev) => ({
+            ...prev,
+            profileImage: profileImageValid ? '' : '* 프로필 사진을 추가해주세요.'
+        }));
 
         if (emailValid && passwordValid && confirmPasswordValid && nicknameValid && profileImageValid) {
-            try {
-                const formData = new FormData();
-                formData.append('email', email);
-                formData.append('password', password);
-                formData.append('nickname', nickname);
-                formData.append('profile_picture', profileImageFile);
-
-                const response = await fetch('http://localhost:3001/signup', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                if (response.status === 201) {
-                    alert("회원가입 성공!");
-                    navigate('/sign-in');
-                } else {
-                    alert("회원가입에 실패했습니다.");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("회원가입 중 오류가 발생했습니다.");
-            }
+            setIsValid(true);
         } else {
-            validateForm();
-            setProfileImageHelperText({ text: '* 프로필 사진을 추가해주세요.', color: 'red' });
+            setIsValid(false);
+        }
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!profileImage) {
+            setHelperTexts((prev) => ({ ...prev, profileImage: '* 프로필 사진을 추가해주세요.' }));
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('email', email.trim());
+        formData.append('password', password.trim());
+        formData.append('confirmPassword', confirmPassword.trim());
+        formData.append('nickname', nickname.trim());
+        formData.append('profilePicture', profileImage);
+
+        try {
+            const response = await fetch('http://localhost:8080/auth/register', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                alert('회원가입이 성공적으로 완료되었습니다.');
+                window.location.href = '/sign-in';
+            } else {
+                const errorText = await response.text();
+                alert('회원가입 중 오류가 발생했습니다: ' + errorText);
+            }
+        } catch (error) {
+            console.error('Error during registration:', error);
+            alert('회원가입 중 오류가 발생했습니다.');
         }
     };
 
     return (
         <div>
-            <Header showBackButton={true} />
+            <header>
+                <a href="#" onClick={() => window.history.back()}>
+                    <img src={BackButtonImage} className="back-button" alt="back-button-image" />
+                </a>
+                <img src={TitleImage} className="title-image" alt="title-image" />
+            </header>
             <section className="signup-form">
-                <FormTitle className="title-signup" text="회원가입" />
-                <form id="signupForm" onSubmit={handleSubmit} encType="multipart/form-data">
-                    <InputTitle title="프로필 사진*" />
-                    <HelperText text={profileImageHelperText.text} color={profileImageHelperText.color} visible={!!profileImageHelperText.text} />
-                    <label className="circle-button" htmlFor="profileImageInput">
-                        <img id="profilePreview" src={profileImageUrl} className="plus-sign" alt="plus-sign" />
-                        <InputFile id="profileImageInput" onChange={handleFileChange} />
+                <h1 className="title-signup">
+                    <img src={BubblesImage} className="icons" alt="img-bubbles" /> 회원가입
+                    <img src={BubblesImage} className="icons" alt="img-bubbles" />
+                </h1>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
+                    <div className="input-titles" id="titleProfileImage">
+                        <img src={WhaleImage} className="icons" alt="img-whale" /><b> 프로필 사진* </b>
+                        <img src={WhaleImage} className="icons" alt="img-whale" />
+                    </div>
+                    <small className="helper-text" style={{ visibility: helperTexts.profileImage ? 'visible' : 'hidden' }}>
+                        {helperTexts.profileImage}
+                    </small>
+                    <label className="circle-button" id="profileImage" htmlFor="profileImageInput">
+                        <img id="profilePreview" src={profilePreview} className="plus-sign" alt="plus-sign" />
+                        <input id="profileImageInput" type="file" accept="image/*" style={{ display: 'none' }} onChange={handleProfileImageChange} />
                     </label>
-                    <div>
-                        <InputTitle title="이메일*" />
-                        <InputEmail name="email" value={email} onChange={handleChange} />
-                        <HelperText text={emailHelperText.text} color={emailHelperText.color} visible={!!emailHelperText.text} />
-                    </div>
-                    <div>
-                        <InputTitle title="비밀번호*" />
-                        <InputPassword id="password" name="password" value={password} onChange={handleChange} />
-                        <HelperText text={passwordHelperText.text} color={passwordHelperText.color} visible={!!passwordHelperText.text} />
-                    </div>
-                    <div>
-                        <InputTitle title="비밀번호 확인*" />
-                        <InputPassword id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={handleChange} placeholder="비밀번호를 한번 더 입력하세요" />
-                        <HelperText text={confirmPasswordHelperText.text} color={confirmPasswordHelperText.color} visible={!!confirmPasswordHelperText.text} />
-                    </div>
-                    <div>
-                        <InputTitle title="닉네임*" />
-                        <InputNickname name="nickname" value={nickname} onChange={handleChange} />
-                        <HelperText text={nicknameHelperText.text} color={nicknameHelperText.color} visible={!!nicknameHelperText.text} />
-                    </div>
-                    <Button id="signupButton" className="signup-button" type="submit" disabled={!isValid} text="회원가입" />
-                    <HyperlinkText to="/sign-in" text="로그인하러 가기" />
+                    <p className="input-titles">
+                        <img src={FishImage} className="icons2" alt="img-fish" /><b> 이메일* </b>
+                        <img src={FishImage} className="icons2" alt="img-fish" />
+                        <input
+                            type="text"
+                            className="input-text"
+                            placeholder="이메일을 입력하세요"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            onBlur={() => validateEmail(true)}
+                        />
+                        <small className="helper-text" style={{ visibility: helperTexts.email ? 'visible' : 'hidden' }}>
+                            {helperTexts.email}
+                        </small>
+                    </p>
+                    <p className="input-titles">
+                        <img src={TurtleImage} className="icons" alt="img-turtle" /><b> 비밀번호* </b>
+                        <img src={TurtleImage} className="icons" alt="img-turtle" />
+                        <input
+                            type="password"
+                            className="input-text"
+                            placeholder="비밀번호를 입력하세요"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            onBlur={() => validatePassword(true)}
+                        />
+                        <small className="helper-text" style={{ visibility: helperTexts.password ? 'visible' : 'hidden' }}>
+                            {helperTexts.password}
+                        </small>
+                    </p>
+                    <p className="input-titles">
+                        <img src={ClamImage} className="icons3" alt="img-clam" /><b> 비밀번호 확인* </b>
+                        <img src={ClamImage} className="icons3" alt="img-clam" />
+                        <input
+                            type="password"
+                            className="input-text"
+                            placeholder="비밀번호를 한번 더 입력하세요"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            onBlur={() => validateConfirmPassword(true)}
+                        />
+                        <small className="helper-text" style={{ visibility: helperTexts.confirmPassword ? 'visible' : 'hidden' }}>
+                            {helperTexts.confirmPassword}
+                        </small>
+                    </p>
+                    <p className="input-titles">
+                        <img src={SharkImage} className="icons2" alt="img-shark" /><b> 닉네임* </b>
+                        <img src={SharkImage} className="icons2" alt="img-shark" />
+                        <input
+                            type="text"
+                            className="input-text"
+                            placeholder="닉네임을 입력하세요"
+                            value={nickname}
+                            onChange={(e) => setNickname(e.target.value)}
+                            onBlur={() => validateNickname(true)}
+                        />
+                        <small className="helper-text" style={{ visibility: helperTexts.nickname ? 'visible' : 'hidden' }}>
+                            {helperTexts.nickname}
+                        </small>
+                    </p>
+                    <button className="signup-button" type="submit" disabled={!isValid} style={{ backgroundColor: isValid ? '#4e9af7' : '#7fb3f3' }}>
+                        회원가입
+                    </button>
+                    <a href="sign-in">
+                        <p><small>로그인하러 가기</small></p>
+                    </a>
                 </form>
             </section>
         </div>

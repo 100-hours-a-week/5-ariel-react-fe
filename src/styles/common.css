@@ -9,3 +9,35 @@ body {
     background-image: url('../assets/images/blue_background.avif');
     background-size: cover;
 }
+
+.icons {
+    position: relative;
+    top: 5px;
+    width: 30px;
+}
+
+.icons2 {
+    position: relative;
+    top: 10px;
+    width: 30px;
+}
+
+.icons3 {
+    position: relative;
+    top: 5px;
+    width: 25px;
+}
+
+.title-image {
+    display: block;
+    margin: 10px auto;
+    width: 150px;
+}
+
+.back-button {
+    color: black;
+    margin-top: 13px;
+    width: 30px;
+    position: absolute;
+    left: calc(50% - 200px);
+}

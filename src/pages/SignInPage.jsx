@@ -9,6 +9,7 @@ const SignInPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [helperText, setHelperText] = useState('');
+    const [helperTextColor, setHelperTextColor] = useState('red');
     const [isValid, setIsValid] = useState(false);
 
     useEffect(() => {
@@ -26,6 +27,7 @@ const SignInPage = () => {
         } else {
             setIsValid(false);
             setHelperText(`* ${validationMessage}`);
+            setHelperTextColor('red');
         }
     };
 
@@ -83,11 +85,13 @@ const SignInPage = () => {
             sessionStorage.setItem('jwtToken', token);
 
             setHelperText('* 성공');
+            setHelperTextColor('blue');
             setTimeout(() => {
                 redirectToPostListPage();
             }, 3000);
         } else {
             setHelperText('* 이메일 또는 비밀번호를 다시 확인해주세요.');
+            setHelperTextColor('red');
         }
     };
 
@@ -123,7 +127,7 @@ const SignInPage = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <small className="helper-text" style={{ visibility: helperText ? 'visible' : 'hidden' }}>{helperText}</small>
+                        <small className="helper-text" style={{ visibility: helperText ? 'visible' : 'hidden', color: helperTextColor }}>{helperText}</small>
                     </p>
                     <button id="login-button" type="submit" disabled={!isValid} style={{ backgroundColor: isValid ? "#4e9af7" : "#7fb3f3" }}>
                         로그인
